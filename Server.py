@@ -1,13 +1,12 @@
 import socket
 from _thread import *
-from Player import *
 import pickle
 
 # Local Ip (IPV4 FROM CMD IPCONFIG, DEVICE SPECIFIC)
 server = socket.gethostbyname(socket.gethostname())
 
 # Server Port
-port = 13009
+port = 13010
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -27,12 +26,8 @@ playerPositions = [[100, 100], [400, 100]]
 
 
 # client = connection, addr = address
-def threaded_client(client, args):
-    player = args[0]
-
+def threaded_client(client, player):
     while True:
-        try:
-
             data = pickle.loads(client.recv(2048))
             # checks to see if any data is being received from the client, if not it assumes that the client is
             # disconnected and stops running in the background
@@ -41,30 +36,25 @@ def threaded_client(client, args):
                     reply = (playerPositions[player])
                 # reply with other player position
                 else:
-                    if player==0:
+                    if player == 0:
                         playerPositions[0] = data
                         reply = playerPositions[1]
                     else:
                         playerPositions[1] = data
                         reply = playerPositions[0]
             else:
-                print("Disconnected")
+                print("Lost Connection")
+                client.close()
                 break
 
             # sends data back to clients
             client.sendall(pickle.dumps(reply))
-        except:
-            print("Lost Connection")
-            client.close()
-            break
-
 
 
 # keeps track of current playerPositions data
-CurrentPlayer = 0
+currentPlayer = 0
 while True:
-    client, addr = s.accept()
+    connection, addr = s.accept()
     print("Connected to:", addr)
-    args = [CurrentPlayer]
-    start_new_thread(threaded_client, (client, args))
-    CurrentPlayer += 1
+    start_new_thread(threaded_client, (connection, currentPlayer))
+    currentPlayer += 1

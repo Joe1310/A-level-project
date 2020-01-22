@@ -31,12 +31,18 @@ class Player(Sprite):
             if self.keyCheck(keys):
                 self.jumping = False
 
-    def setPos(self,pos):
+    def setPos(self, pos):
         self.rect.x = pos[0]
         self.rect.y = pos[1]
 
     def getPos(self):
         return [self.rect.x, self.rect.y]
+
+    '''########    #      #       #
+       #           #        #   #
+       ###         #          #
+       #           #        #   #
+       #           #      #       #'''
 
     def jump(self):
         jumpheight = self.vel * 4

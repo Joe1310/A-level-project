@@ -12,19 +12,20 @@ spriteList = pygame.sprite.Group()
 
 # Main Program
 def main():
-
-    startPos = (displayWidth / 2, 200)
+    # Upon connection receives player position from server.
     connection = ClientConnection()
     myPlayerPosition = connection.connect()
-    otherPlayerPosition = (0,0)
-    # gets base position for player
+    otherPlayerPosition = (0, 0)
+
     pygame.init()
+
+    # Initialises player sprites
     myPlayer = Player(myPlayerPosition, 20, 20, (255, 0, 0))
-    otherPlayer = Player((otherPlayerPosition), 20, 20, (0, 0, 255))
+    otherPlayer = Player(otherPlayerPosition, 20, 20, (0, 0, 255))
     spriteList.add(otherPlayer)
     spriteList.add(myPlayer)
 
-    Clock = pygame.time.Clock()
+    clock = pygame.time.Clock()
 
     run = True
     while run:
@@ -32,7 +33,6 @@ def main():
         otherPlayerPosition = connection.send(myPlayerPosition)
         otherPlayer.setPos(otherPlayerPosition)
         spriteList.update()
-        spriteList.sprites()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -44,7 +44,7 @@ def main():
 
         pygame.display.update()
 
-        Clock.tick(60)
+        clock.tick(60)
     pygame.quit()
     exit()
 
