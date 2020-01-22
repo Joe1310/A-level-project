@@ -7,7 +7,7 @@ import pickle
 server = socket.gethostbyname(socket.gethostname())
 
 # Server Port
-port = 13010
+port = 13009
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
@@ -23,47 +23,48 @@ except socket.error as e:
 s.listen(2)
 print("Waiting for connection, Server Initiated")
 
-playerPositions = [[0,0],[0,0]]
+playerPositions = [[100, 100], [400, 100]]
 
-# conn = connection, addr = address
-def threaded_client(conn, player):
-    conn.send(pickle.dumps(playerPositions[player]))
-    reply = ""
+
+# client = connection, addr = address
+def threaded_client(client, args):
+    player = args[0]
+
     while True:
         try:
-            data = pickle.loads(conn.recv(2048))
-            playerPositions[player] = data
-            print(playerPositions)
 
+            data = pickle.loads(client.recv(2048))
             # checks to see if any data is being received from the client, if not it assumes that the client is
             # disconnected and stops running in the background
-            if not data:
+            if data:
+                if data == "getPos":
+                    reply = (playerPositions[player])
+                # reply with other player position
+                else:
+                    if player==0:
+                        playerPositions[0] = data
+                        reply = playerPositions[1]
+                    else:
+                        playerPositions[1] = data
+                        reply = playerPositions[0]
+            else:
                 print("Disconnected")
                 break
 
-            else:
-                if player == 1:
-                    reply = playerPositions[0]
-
-                else:
-                    reply = playerPositions[1]
-                print("Received:", data)
-                print("Sending:", reply)
-
             # sends data back to clients
-            conn.sendall(pickle.dumps(reply))
+            client.sendall(pickle.dumps(reply))
         except:
+            print("Lost Connection")
+            client.close()
             break
 
-    print("Lost Connection")
-    conn.close()
-    return
+
 
 # keeps track of current playerPositions data
 CurrentPlayer = 0
 while True:
-    conn, addr = s.accept()
+    client, addr = s.accept()
     print("Connected to:", addr)
-
-    start_new_thread(threaded_client, (conn,CurrentPlayer))
+    args = [CurrentPlayer]
+    start_new_thread(threaded_client, (client, args))
     CurrentPlayer += 1

@@ -12,7 +12,7 @@ class Player(Sprite):
         self.vel = 3
         self.jumping = False
 
-# defines the movement controls for the players
+    # defines the movement controls for the players
     def move(self):
         keys = pygame.key.get_pressed()
 
@@ -31,12 +31,16 @@ class Player(Sprite):
             if self.keyCheck(keys):
                 self.jumping = False
 
+    def setPos(self,pos):
+        self.rect.x = pos[0]
+        self.rect.y = pos[1]
+
     def getPos(self):
-        return [self.x, self.y]
+        return [self.rect.x, self.rect.y]
 
     def jump(self):
-        jumpheight = self.vel*4
-        while jumpheight >= -(self.vel*4):
+        jumpheight = self.vel * 4
+        while jumpheight >= -(self.vel * 4):
             print(jumpheight)
             print(self.rect.y)
             self.rect.y -= jumpheight
@@ -46,5 +50,3 @@ class Player(Sprite):
         if keys[pygame.K_w]:
             return False
         return True
-
-
