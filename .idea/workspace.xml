@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0d46e402-9848-4d08-a968-a5093b7eb17f" name="Default Changelist" comment="" />
+    <list default="true" id="0d46e402-9848-4d08-a968-a5093b7eb17f" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -103,7 +105,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1579725755491</updated>
-      <workItem from="1579725756915" duration="2644000" />
+      <workItem from="1579725756915" duration="3095000" />
     </task>
     <task id="LOCAL-00001" summary="Now connects to server and clients are synced to play with each other">
       <created>1579727112048</created>
@@ -112,11 +114,29 @@
       <option name="project" value="LOCAL" />
       <updated>1579727112048</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Now connects to server and clients are synced to play with each other">
+      <created>1579729998535</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1579729998535</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Now connects to server and clients are synced to play with each other" />
@@ -127,10 +147,10 @@
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
     <state x="414" y="196" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1080@0.0.1920.1080" timestamp="1579725942457" />
-    <state x="585" y="131" key="CommitChangelistDialog2" timestamp="1579727110304">
+    <state x="585" y="131" key="CommitChangelistDialog2" timestamp="1579730485004">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="585" y="131" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1579727110304" />
+    <state x="585" y="131" key="CommitChangelistDialog2/0.0.1920.1080@0.0.1920.1080" timestamp="1579730485004" />
     <state x="740" y="296" key="FileChooserDialogImpl" timestamp="1579727763259">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
