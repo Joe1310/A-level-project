@@ -1,5 +1,4 @@
 import pygame
-import time
 from Sprites import Sprite
 
 
@@ -11,6 +10,7 @@ class Player(Sprite):
         Sprite.__init__(self, self.x, self.y, width, height, colour)
         self.vel = 3
         self.jumping = False
+        self.gravity = 1
 
     # defines the movement controls for the players
     def move(self):
@@ -22,14 +22,12 @@ class Player(Sprite):
         if keys[pygame.K_a]:
             self.rect.x -= self.vel
 
-        if keys[pygame.K_s]:
-            self.rect.y += self.vel
+        self.rect.y += self.gravity
 
         if keys[pygame.K_w] and self.jumping == False:
             self.jumping = True
+            print(self.jumping)
             self.jump()
-            if self.keyCheck(keys):
-                self.jumping = False
 
     def setPos(self, pos):
         self.rect.x = pos[0]
@@ -45,12 +43,9 @@ class Player(Sprite):
        #           #      #       #'''
 
     def jump(self):
-        jumpheight = self.vel * 4
-        while jumpheight >= -(self.vel * 4):
-            print(jumpheight)
-            print(self.rect.y)
-            self.rect.y -= jumpheight
-            jumpheight -= self.vel
+        for i in range(3):
+            self.rect.y -= self.vel
+
 
     def keyCheck(self, keys):
         if keys[pygame.K_w]:
