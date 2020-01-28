@@ -58,3 +58,5 @@ while True:
     print("Connected to:", addr)
     start_new_thread(threaded_client, (connection, currentPlayer))
     currentPlayer += 1
+
+# GENERATE MAP ON SERVER SIDE AND SEND PLATFORM DATA TO CLIENTS AND PUT INTO SPRITE LIST TO BE BLITTED.
