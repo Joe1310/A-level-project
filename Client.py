@@ -7,7 +7,8 @@ displayWidth = 500
 displayHeight = 500
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 pygame.display.set_caption("Client")
-spriteList = pygame.sprite.Group()
+everythingElseSpriteList = pygame.sprite.Group()
+playerSpriteList = pygame.sprite.Group()
 
 
 # Main Program
@@ -22,8 +23,9 @@ def main():
     # Initialises player sprites
     myPlayer = Player(myPlayerPosition, 20, 20, (255, 0, 0))
     otherPlayer = Player(otherPlayerPosition, 20, 20, (0, 0, 255))
-    spriteList.add(otherPlayer)
-    spriteList.add(myPlayer)
+
+    playerSpriteList.add(otherPlayer)
+    playerSpriteList.add(myPlayer)
 
     clock = pygame.time.Clock()
 
@@ -32,7 +34,7 @@ def main():
         myPlayerPosition = myPlayer.getPos()
         otherPlayerPosition = connection.send(myPlayerPosition)
         otherPlayer.setPos(otherPlayerPosition)
-        spriteList.update()
+        playerSpriteList.update()
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -40,7 +42,7 @@ def main():
 
         myPlayer.move()
         gameDisplay.fill((255, 255, 255))
-        spriteList.draw(gameDisplay)
+        playerSpriteList.draw(gameDisplay)
 
         pygame.display.update()
 
