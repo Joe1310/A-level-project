@@ -1,13 +1,14 @@
 import pygame
 from ClientConnection import ClientConnection
 from Player import Player
+from Wall import Wall
 
 # Create game display
 displayWidth = 500
 displayHeight = 500
 gameDisplay = pygame.display.set_mode((displayWidth, displayHeight))
 pygame.display.set_caption("Client")
-everythingElseSpriteList = pygame.sprite.Group()
+platformSpriteList = pygame.sprite.Group()
 playerSpriteList = pygame.sprite.Group()
 
 
@@ -23,6 +24,13 @@ def main():
     # Initialises player sprites
     myPlayer = Player(myPlayerPosition, 20, 20, (255, 0, 0))
     otherPlayer = Player(otherPlayerPosition, 20, 20, (0, 0, 255))
+    startFloor = Wall(0, 480, 500, 20, (0, 0, 0))
+    startWall = Wall(0, 0, 20, 480, (0, 0, 0))
+    startRoof = Wall(0, 0, 480, 20, (0, 0, 0))
+
+    platformSpriteList.add(startFloor)
+    platformSpriteList.add(startWall)
+    platformSpriteList.add(startRoof)
 
     playerSpriteList.add(otherPlayer)
     playerSpriteList.add(myPlayer)
@@ -42,6 +50,7 @@ def main():
 
         myPlayer.move()
         gameDisplay.fill((255, 255, 255))
+        platformSpriteList.draw(gameDisplay)
         playerSpriteList.draw(gameDisplay)
 
         pygame.display.update()
