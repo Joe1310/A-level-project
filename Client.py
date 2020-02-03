@@ -24,6 +24,7 @@ def main():
     # Initialises player sprites
     myPlayer = Player(myPlayerPosition, 20, 20, (255, 0, 0))
     otherPlayer = Player(otherPlayerPosition, 20, 20, (0, 0, 255))
+
     startFloor = Wall(0, 480, 500, 20, (0, 0, 0))
     startWall = Wall(0, 0, 20, 480, (0, 0, 0))
     startRoof = Wall(0, 0, 480, 20, (0, 0, 0))
@@ -44,6 +45,9 @@ def main():
         otherPlayer.setPos(otherPlayerPosition)
         playerSpriteList.update()
 
+        while pygame.sprite.spritecollideany(myPlayer, platformSpriteList) is None:
+            myPlayer.checkCollide()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 run = False
@@ -51,7 +55,7 @@ def main():
         myPlayer.move()
         gameDisplay.fill((255, 255, 255))
         platformSpriteList.draw(gameDisplay)
-        playerSpriteList.draw(gameDisplay)
+        playerSpriteList.draw(gameDispl ay)
 
         pygame.display.update()
 

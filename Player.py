@@ -22,12 +22,13 @@ class Player(Sprite):
         if keys[pygame.K_a]:
             self.rect.x -= self.vel
 
-        self.rect.y += self.gravity
-
         if keys[pygame.K_w] and self.jumping == False:
             self.jumping = True
             print(self.jumping)
             self.jump()
+
+    def checkCollide(self):
+        self.rect.y += self.gravity
 
     def setPos(self, pos):
         self.rect.x = pos[0]
@@ -43,9 +44,7 @@ class Player(Sprite):
        #           #      #       #'''
 
     def jump(self):
-        for i in range(3):
-            self.rect.y -= self.vel
-
+        pass
 
     def keyCheck(self, keys):
         if keys[pygame.K_w]:
