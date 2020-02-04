@@ -11,6 +11,9 @@ pygame.display.set_caption("Client")
 platformSpriteList = pygame.sprite.Group()
 playerSpriteList = pygame.sprite.Group()
 
+def Lobby():
+
+    main()
 
 # Main Program
 def main():
@@ -43,7 +46,14 @@ def main():
         myPlayerPosition = myPlayer.getPos()
         otherPlayerPosition = connection.send(myPlayerPosition)
         otherPlayer.setPos(otherPlayerPosition)
+
+        myPlayer.scrollPlayer()
+        for i in platformSpriteList.sprites():
+            i.scroll()
+
+        platformSpriteList.update()
         playerSpriteList.update()
+
 
         while pygame.sprite.spritecollideany(myPlayer, platformSpriteList) is None:
             myPlayer.checkCollide()
@@ -55,7 +65,7 @@ def main():
         myPlayer.move()
         gameDisplay.fill((255, 255, 255))
         platformSpriteList.draw(gameDisplay)
-        playerSpriteList.draw(gameDispl ay)
+        playerSpriteList.draw(gameDisplay)
 
         pygame.display.update()
 
@@ -64,4 +74,4 @@ def main():
     exit()
 
 
-main()
+Lobby()

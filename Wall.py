@@ -6,5 +6,9 @@ class Wall(Sprite):
     def __init__(self, x, y, width, height, colour):
         Sprite.__init__(self, x, y, width, height, colour)
 
+    def scroll(self):
+        self.rect.x -= 1
+
+
 
 

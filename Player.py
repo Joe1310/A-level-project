@@ -13,7 +13,7 @@ class Player(Sprite):
         self.gravity = 1
 
     # defines the movement controls for the players
-    def move(self): # You need to move it, check for collisions, if true then move it back, update
+    def move(self):
         keys = pygame.key.get_pressed()
 
         if keys[pygame.K_d]:
@@ -26,6 +26,9 @@ class Player(Sprite):
             self.jumping = True
             print(self.jumping)
             self.jump()
+
+    def scrollPlayer(self):
+        self.rect.x -= 1
 
     def checkCollide(self):
         self.rect.y += self.gravity
