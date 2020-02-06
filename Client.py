@@ -11,9 +11,60 @@ pygame.display.set_caption("Client")
 platformSpriteList = pygame.sprite.Group()
 playerSpriteList = pygame.sprite.Group()
 
-def Lobby():
+# Define colours
 
-    main()
+red = (200, 0, 0)
+green = (0, 200, 0)
+
+bright_red = (255, 0, 0)
+bright_green = (0, 255, 0)
+
+pygame.font.init()
+
+
+def textObjects(text, font):
+    textSurface = font.render(text, True, (0, 0, 0))
+    return textSurface, textSurface.get_rect()
+
+
+def messageDisplay(text):
+    text = pygame.font.Font('freesansbold.ttf', 50)
+    textSurf, textRect = textObjects(text, text)
+    textRect.center = ((displayWidth / 2), (displayHeight / 2))
+    gameDisplay.blit(textSurf, textRect)
+
+    pygame.display.update()
+
+
+def lobby():
+
+    intro = True
+
+    while intro:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
+        buttonPos = (200, 350, 100, 50)
+        gameDisplay.fill((255, 255, 255))
+        pygame.draw.rect(gameDisplay, (0, 255, 0), buttonPos)
+        text = pygame.font.Font('freesansbold.ttf', 50)
+        textSurf, textRect = textObjects("Network Jump", text)
+        textRect.center = ((displayWidth / 2), (displayHeight / 2))
+        gameDisplay.blit(textSurf, textRect)
+
+        mouse = pygame.mouse.get_pos()
+
+        if 200 + 100 > mouse[0] > 200 and 350 + 50 > mouse[1] > 350:
+            pygame.draw.rect(gameDisplay, bright_green, buttonPos)
+
+            if pygame.mouse.get_pressed()[0]:
+                main()
+        else:
+            pygame.draw.rect(gameDisplay, green, buttonPos)
+
+        pygame.display.update()
+
 
 # Main Program
 def main():
@@ -74,4 +125,4 @@ def main():
     exit()
 
 
-Lobby()
+lobby()
