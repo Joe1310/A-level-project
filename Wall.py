@@ -1,14 +1,7 @@
-import pygame
 from Sprites import Sprite
+import pygame
 
 
 class Wall(Sprite):
-    def __init__(self, x, y, width, height, colour):
-        Sprite.__init__(self, x, y, width, height, colour)
-
-    def scroll(self):
-        self.rect.x -= 1
-
-
-
-
+    def __init__(self, x, y, width, height):
+        Sprite.__init__(self, x, y, width, height, (0, 0, 0))
