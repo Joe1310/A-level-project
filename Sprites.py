@@ -10,3 +10,6 @@ class Sprite(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
+
+    def scroll(self):
+        self.rect.x -= 3
