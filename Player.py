@@ -8,11 +8,13 @@ class Player(Sprite):
         self.x = posargs[0]
         self.y = posargs[1]
         Sprite.__init__(self, self.x, self.y, width, height, colour)
-        self.vel = 3
+        self.vel = 5
+        self.upVel = 30
         self.jumping = False
-        self.gravity = 1
+        self.gravity = 5
+        self.falling = False
+        self.dead = False
 
-    # defines the movement controls for the players
     def move(self):
         keys = pygame.key.get_pressed()
 
@@ -22,16 +24,16 @@ class Player(Sprite):
         if keys[pygame.K_a]:
             self.rect.x -= self.vel
 
-        if keys[pygame.K_w] and self.jumping == False:
-            self.jumping = True
-            print(self.jumping)
-            self.jump()
+    def jump(self):
+        keys = pygame.key.get_pressed()
 
-    def scrollPlayer(self):
-        self.rect.x -= 1
+        if keys[pygame.K_w]:
+            if self.jumping is False and self.falling is False:
+                self.rect.y -= self.upVel
 
-    def checkCollide(self):
+    def notCollide(self):
         self.rect.y += self.gravity
+        self.falling = True
 
     def setPos(self, pos):
         self.rect.x = pos[0]
@@ -40,16 +42,12 @@ class Player(Sprite):
     def getPos(self):
         return [self.rect.x, self.rect.y]
 
-    '''########    #      #       #
-       #           #        #   #
-       ###         #          #
-       #           #        #   #
-       #           #      #       #'''
+    def checkBounds(self):
+        if self.rect.y >= 520:
+            self.dead = True
 
-    def jump(self):
-        pass
+        if self.rect.x < 0:
+            self.dead = True
 
-    def keyCheck(self, keys):
-        if keys[pygame.K_w]:
-            return False
-        return True
+        elif self.rect.x >= 480:
+            self.rect.x = 480
